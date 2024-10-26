@@ -26,13 +26,13 @@ def get_code():
     totp = pyotp.TOTP(SECRET)
     current_code = totp.now()
     remaining_time = 30 - int(time.time()) % 30
-    
+
     return jsonify({
         'code': current_code,
         'remainingSeconds': remaining_time
     })
 
-# Vercel requires this
+# Avoid debug mode on Vercel deployment
 app.debug = False
 
 # For local development
